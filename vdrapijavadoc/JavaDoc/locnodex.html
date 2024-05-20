@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<TITLE>LocateNode Command Example</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<h3><font face="arial">Creating Standard Objects Using the LocateNode Command - Example</font></h3>
+
+<TT>LocateNodeCommand locateNode = new LocateNodeCommand(); // create command.</TT><FONT FACE="Arial"><BR>
+<BR>
+</FONT><TT>// Identify the objects handling callbacks.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>locateNode.setObjectWithNode (this); // Set caller to be object with node.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>locateNode.setPromptForLogin(this);&nbsp; // Object to use for prompting, which implements</TT><FONT FACE="Arial">
+<BR>
+</FONT><TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // the IcanPromptForLogin interface.</TT><FONT FACE="Arial"><BR>
+<BR>
+</FONT><TT>// Create a list of key-value pairs representing the command parameters.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>Vector keyValuePairs = new Vector();</TT><FONT FACE="Arial"><BR>
+</FONT><TT>keyValuePairs.addElement (new ICommand.KeyValuePair (CommandKeyType.DocumentServer, documentServer));</TT><FONT FACE="Arial"><BR>
+<BR>
+</FONT><TT>keyValuePairs.addElement (new ICommand.KeyValuePair (CommandKeyType.ReportId,reportID));</TT><FONT FACE="Arial"><BR>
+</FONT><TT>keyValuePairs.addElement (new ICommand.KeyValuePair (CommandKeyType.VersionId,versionID)); </TT><FONT FACE="Arial"><BR>
+</FONT><TT>keyValuePairs.addElement (new ICommand.KeyValuePair (CommandKeyType.SectionId,sectionID));</TT><FONT FACE="Arial"><BR>
+</FONT><TT>keyValuePairs.addElement (new ICommand.KeyValuePair (CommandKeyType.Page,</TT><FONT FACE="Arial"> <BR>
+</FONT><TT>Integer.toString(pageNumber)));</TT><FONT FACE="Arial"><BR>
+<BR>
+</FONT><TT>// Load the parameters into the LocateNode command and execute it.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>try {</TT><FONT FACE="Arial"> <BR>
+</FONT><TT>&nbsp;&nbsp; locateNode.load(keyValuePairs);</TT><FONT FACE="Arial"> <BR>
+</FONT><TT>&nbsp;&nbsp; locateNode.execute(); </TT><FONT FACE="Arial"><BR>
+</FONT><TT>}catch (ViewDirectException e) {</div><div>}</TT>
+
+
+<p><font face="arial"><a href="overview.html#locnod">Back to Overview</a></font>
+
+</BODY>
+</HTML>

@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<TITLE>Retrieving Document Server Information - Examples</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<h3><font face="arial">Retrieving Document Server Properties - Example</h3>
+
+<p><tt><font face="arial">The following sample code illlustrates retrieving Remote and TCP/IP document server properties.</p>
+
+<tt>for( int index=0; index &lt; ds.length; index++ )</tt><br>
+<tt>{</tt><br>
+<dd><tt></tt>
+<dd><tt>     IDocumentServer dServer = (IDocumentServer) ds[index];</tt><br>
+<br>
+<dd><tt>     if (dServer instanceof ITCPIPDocumentServer)</tt><br>
+<dd><tt>     {</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;ITCPIPDocumentServer tcpip = (ITCPIPDocumentServer) dServer;</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;String hostName = tcpip.getHostName();</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;String serviceName = tcpip.getServiceName();</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;String vendorLib = tcpip.getVendorDLLPath();</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;String transactionName = tcpip.getTransactionName();</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;String vendor = tcpip.getVendorName();</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;long bufSize = tcpip.getReceiveBufferSize();</tt><br>
+<dd><tt>     }</tt><br>
+<dd><tt>     else if (dServer instanceof IRemoteDocumentServer)</tt><br>
+<dd><tt>     {</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;IRemoteDocumentServer remote = (IRemoteDocumentServer) dServer;</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;RemoteProtocol rProtocol = remote.getRemoteProtocol();</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;String hostName = remote.getRemoteHost();</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;long portNum = remote.getPortNumber();</tt><br>
+<dd><tt>&#9;&nbsp;&nbsp;String docServerName = getRemoteDocumentServerName();</tt><br>
+<dd><tt>     }&#9;</tt><br>
+<tt>}</tt><br>
+
+<p><font face="arial"><a href="overview.html#retrieve">Back to Overview</a></font>
+
+<a name="remote"><h3><font face="arial">Configuring a New Remote Document Server - Example</font></h3>
+
+<p><tt><font face="arial">The following sample code illlustrates setting up a remote document server for a user.
+<p>
+<tt>// Before setting up a new server in the profile, retrieve the list of document servers that</tt><br>
+<tt>// are configured on that server so that you can pick the one you want to use</tt><br><br>
+<tt>String [] docSrvrArray = RemoteDocumentServerListFactory.createList(rProtocol, hostName, portNumber);</tt><br>
+
+<tt>&nbsp;</tt><br>
+<tt>// Create a new server called ‘REMOTE_SERVER’ in the profile</tt><br>
+<tt>IDocumentServer newServer = dsf.createNew("REMOTE_SERVER",DocumentServerProtocol.RPC);</tt><br><br>
+
+<tt>// Next set its properties</tt><br>
+<tt>newServer.setRecipient("ADMIN");</tt><br>
+<tt>newServer.setPromptForRecipientIDandPassword(false);</tt><br>
+<tt>newServer.setAllowSaveRecipientIDAndPassword(false);</tt><br>
+<tt>newServer.setProtocol(DocumentServerProtocol.RPC);</tt><br>
+<br>
+<tt>// Next set those properties specific to the remote server</tt><br>
+<tt>if (newServer instanceof IRemoteDocumentServer)</tt><br>
+<tt>{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;IRemoteDocumentServer rServer = (IRemoteDocumentServer) newServer;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;rServer.setPortNumber( portNumber );</tt><br>
+<br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;// use the first document server in the docSrvrArray</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;rServer.setRemoteDocumentServerName( docSrvrArray[0] );</tt><br>
+<br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;rServer.setRemoteHost( hostName );</tt><br>
+
+<tt>}</tt>
+
+<p><font face="arial"><a href="overview.html#config">Back to Overview</a></font>
+
+<a name="tcpip"><h3><font face="arial">Configuring a New TCP/IP Document Server - Example</font></h3>
+
+<p><tt><font face="arial">The following sample code illlustrates setting up a TCP/IP document server for a user.
+<p>
+
+<tt>// Create a new server called ‘TCPIP_SERVER’ in the profile</tt><br>
+<tt>IDocumentServer dServer = dsf.createNew("TCPIP_SERVER",DocumentServerProtocol.TCPIP);</tt><br><br>
+<tt>// Set its properties</tt><br>
+<tt>dServer.setRecipient("ADMIN");</tt><br>
+<tt>dServer.setPromptForRecipientIDandPassword(false);</tt><br>
+<tt>dServer.setAllowSaveRecipientIDAndPassword(false);</tt><br>
+<tt>dServer.setProtocol(DocumentServerProtocol.TCPIP);</tt><br>
+<br>
+<tt>// Set those properties specific to the TCPIP server</tt><br>
+<tt>if (dServer instanceof ITCPIPDocumentServer)</tt><br>
+<tt>{</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;ITCPIPDocumentServer tServer = (IRemoteDocumentServer) dServer;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;tServer.setHostName( hostName );</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;tServer.setReceiveBufferSize( bufSize );</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;tServer.setTransactionName( transactionName );</tt><br>
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;tServer.setServiceName( serviceName ); </tt><br>
+<P>}</P>
+
+
+<p><font face="arial"><a href="overview.html#config">Back to Overview</a></font>
+
+
+</BODY>
+</HTML>

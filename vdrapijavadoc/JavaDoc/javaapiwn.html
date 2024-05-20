@@ -1,0 +1,314 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<title>Installing ViewDirect API for Java on Windows</title>
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<h2><span style='font-family:Arial'>Installing <span class=SpellE>ViewDirect</span>
+API for Java on Windows<o:p></o:p></span></h2>
+
+<p><span style='font-size:10.0pt;font-family:Arial'>Installing the <span
+class=SpellE>ViewDirect</span> API for Java for the purposes of developing an
+API application consists of four steps: transferring the API files to the desired
+location on the application server, specifying the required environment variables, configuring
+document servers, and verifying the default configuration
+settings. These steps are described in detail below.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;font-family:Arial'>To deploy an API
+application, simply add your application code to the <span class=SpellE>vdrapi.war</span>
+file and distribute this file as needed.<o:p></o:p></span></p>
+
+<p><b><span style='font-size:10.0pt;font-family:Arial'>Note:</span></b><span
+style='font-size:10.0pt;font-family:Arial'> <o:p></o:p></span></p>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-size:10.0pt;
+     font-family:Arial'>You must have JDK version 1.3 or later installed on the
+     machine running the <span class=SpellE>ViewDirect</span> API for Java.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-size:10.0pt;
+     font-family:Arial'>A J2EE-compatible application server is required for using
+     <span class=SpellE><b>DocumentDirect</b></span><b> for the
+     Internet Administrator</b> to create a configuration profile for your <span
+     class=SpellE>ViewDirect</span> API for Java-based application. However,
+     you do not need to run the <span class=SpellE>ViewDirect</span> API for
+     Java itself on a J2EE-compatible application server.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-size:10.0pt;
+     font-family:Arial'>You cannot run two programs implementing the <span
+     class=SpellE>ViewDirect</span> API for Java on the same application
+     server. Additionally, you cannot run <span class=SpellE>DocumentDirect</span>
+     for the Internet and a program implementing the <span class=SpellE>ViewDirect</span>
+     API for Java on the same application server. You can overcome these restrictions
+     by installing separate instances of the application server on the same
+     machine, with each application server instance running with a single
+     Mobius application instance on a separate port.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-size:10.0pt;
+     font-family:Arial'>If you upgrade your version of the <span class=SpellE>ViewDirect</span>
+     API for Java, you do not need to recompile your client application. It
+     will continue to run as normal. However, if you do recompile your
+     application, the compiler will indicate that the <span class=SpellE>ViewDirect</span>
+     exception is not handled if an application object calls any of the following
+     methods:<o:p></o:p></span></li>
+</ul>
+
+<ul type=disc>
+ <ul type=circle>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l15 level2 lfo6;tab-stops:list 1.0in'><span class=SpellE><span
+      style='font-size:10.0pt;font-family:Arial'>com.mobius.vdrapi.IDocumentServerFactor.totalNumberInList</span></span><span
+      style='font-size:10.0pt;font-family:Arial'>()<o:p></o:p></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l15 level2 lfo6;tab-stops:list 1.0in'><span class=SpellE><span
+      style='font-size:10.0pt;font-family:Arial'>com.mobius.vdrapi.IHasDescription.getDescription</span></span><span
+      style='font-size:10.0pt;font-family:Arial'>()<o:p></o:p></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l15 level2 lfo6;tab-stops:list 1.0in'><span class=SpellE><span
+      style='font-size:10.0pt;font-family:Arial'>com.mobius.vdrapi.IPageList.Add</span></span><span
+      style='font-size:10.0pt;font-family:Arial'>()<o:p></o:p></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l15 level2 lfo6;tab-stops:list 1.0in'><span class=SpellE><span
+      style='font-size:10.0pt;font-family:Arial'>com.mobius.vdrapi.Isession.detach</span></span><span
+      style='font-size:10.0pt;font-family:Arial'>()
+      <![if !supportLineBreakNewLine]>
+      <![endif]><o:p></o:p></span></li>
+ </ul>
+</ul>
+
+<p class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+margin-left:.5in'><span style='font-size:10.0pt;font-family:Arial'>To resolve
+this issue, ensure that the application either catches or throws the <span
+class=SpellE>ViewDirect</span> exception prior to recompiling.<o:p></o:p></span></p>
+
+<p><b><span style='font-size:10.0pt;font-family:Arial'>Transferring the API
+Files to the Desired Location<o:p></o:p></span></b></p>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial'>On the
+machine where you are installing the <span class=SpellE>ViewDirect</span> API
+for Java, perform the following steps:<o:p></o:p></span></p>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<ol start=1 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l5 level1 lfo9;tab-stops:list .5in'><span style='font-size:10.0pt;
+     font-family:Arial'>Create a directory called <span class=SpellE>ddrint</span>.<o:p></o:p></span></li>
+</ol>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<ol start=2 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l5 level1 lfo9;tab-stops:list .5in'><span style='font-size:10.0pt;
+     font-family:Arial'>Copy <span class=SpellE>vdrapi.war</span> from the <span
+     class=SpellE>DocumentDirect</span> for the Internet installation CD to the
+     <span class=SpellE>ddrint</span> directory.
+     You can find the vdrapi.war file in the \Transfer\ViewDirectJavaAPI directory.<o:p></o:p></span></li>
+</ol>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<ol start=3 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l5 level1 lfo9;tab-stops:list .5in'><span style='font-size:10.0pt;
+     font-family:Arial'>Use a file extraction utility, such as WinZip, to
+     extract the contents of <span class=SpellE>vdrapi.war</span>.&nbsp;<o:p></o:p></span></li>
+</ol>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal style='margin-left:.5in'><b><span style='font-size:10.0pt;
+font-family:Arial'>Note:</span></b><span style='font-size:10.0pt;font-family:
+Arial'> If you plan to incorporate DocumentDirect for the Internet or FCP features into your application,
+use ddrint.ear or ddrint.war instead of the vdrapi.war file. The ddrint.ear and ddrint.war files are
+located in the \Transfer\Combined directory.<o:p></o:p></span></p>
+
+</blockquote>
+
+
+
+<p><b><span style='font-size:10.0pt;font-family:Arial'>Specifying the
+Environment Variables<o:p></o:p></span></b></p>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial'>On the
+machine where you are installing the <span class=SpellE>ViewDirect</span> API
+for Java:<o:p></o:p></span></p>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<ol start=1 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l13 level1 lfo17;tab-stops:list .5in'><span style='font-size:
+     10.0pt;font-family:Arial'>Add the full path of the VDRAPI library
+     directory and the full path of the JDK executable directory to the PATH
+     environment variable. For example, type the following command:<br>
+     <br>
+     <b>set PATH=%<span class=SpellE>PATH%;c:\ddrint\WEB_INF\lib;c:\JDK\bin</span></b><o:p></o:p></span></li>
+</ol>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<ol start=2 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l13 level1 lfo17;tab-stops:list .5in'><span style='font-size:
+     10.0pt;font-family:Arial'>Add the full path of <span class=SpellE>vdrapi.jar</span>
+     in the VDRAPI directory to the CLASSPATH environment variable. For
+     example, type the following command:<br>
+     <br>
+     <b>set CLASSPATH=%CLASSPATH%;c:\ddrint\WEB_INF\lib\vdrapi.jar </span></b><o:p></o:p></span></li>
+</ol>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal style='margin-left:.5in'><b><span style='font-size:10.0pt;
+font-family:Arial'>Note:</span></b><span style='font-size:10.0pt;font-family:
+Arial'> For Windows 2000 users, the recommended method for setting environment
+variables is to use the <b>System</b> option in the Control Panel.<o:p></o:p></span></p>
+
+</blockquote>
+
+<p><b><span style='font-size:10.0pt;font-family:Arial'>Configuring Document
+Servers<o:p></o:p></span></b></p>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial'>To
+configure the document servers with which your application communicates, use
+the <span class=SpellE>DocumentDirect</span> for the Internet Administrator
+utility, which you must install and run on an application server. Refer to
+Appendix A in the <span class=SpellE><i>DocumentDirect</i></span><i> for the
+Internet 2.1 User’s Guide</i> for more information about application server
+requirements. <o:p></o:p></span></p>
+
+<p><b><span style='font-size:10.0pt;font-family:Arial'>Note:</span></b><span
+style='font-size:10.0pt;font-family:Arial'> It is not necessary to install the
+Administrator on the same machine where you are installing the <span
+class=SpellE>ViewDirect</span> API for Java. <o:p></o:p></span></p>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial'>To
+configure document servers, perform the following steps:<o:p></o:p></span></p>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<ol start=1 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l3 level1 lfo21;tab-stops:list .5in'><span style='font-size:10.0pt;
+     font-family:Arial'>If you have not done so already, run the <span
+     class=SpellE>DocumentDirect</span> for the Internet setup program on a
+     Windows machine. Refer to Appendix A in the <span class=SpellE><i>DocumentDirect</i></span><i>
+     for the Internet 2.1 User’s Guide</i> for complete installation
+     information.<o:p></o:p></span></li>
+</ol>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<ol start=2 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l3 level1 lfo21;tab-stops:list .5in'><span style='font-size:10.0pt;
+     font-family:Arial'>Open the <span class=SpellE>DocumentDirect</span> for
+     the Internet Administrator by entering the URL <span style='color:blue'>https://HOSTNAME:PORT/ddrint/servlet/config</span>
+     in your Web browser, where HOSTNAME refers to the location of your
+     application server on which <span class=SpellE>DocumentDirect</span> for
+     the Internet was installed. Click the Document Servers tab. Refer to
+     Chapter 5 in the User’s Guide for more information about configuring
+     document servers.<o:p></o:p></span></li>
+</ol>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<ol start=3 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l3 level1 lfo21;tab-stops:list .5in'><span style='font-size:10.0pt;
+     font-family:Arial'>Close the <span class=SpellE>DocumentDirect</span> for
+     the Internet Administrator. The document server details are saved in
+     c:\winnt\ddrint.ini. If you ran the Administrator on a separate machine,
+     copy the c:\winnt\ddrint.ini file to the c:\winnt directory on the machine
+     where you are installing the <span class=SpellE>ViewDirect</span> API for
+     Java.<o:p></o:p></span></li>
+</ol>
+
+</blockquote>
+
+<p><b><span style='font-size:10.0pt;font-family:Arial'>Verifying the
+Configuration Settings</span></b><span style='font-size:10.0pt;font-family:
+Arial'><o:p></o:p></span></p>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:Arial'>On the
+machine where you are installing the <span class=SpellE>ViewDirect</span> API
+for Java:<o:p></o:p></span></p>
+
+</blockquote>
+
+<blockquote style='margin-top:5.0pt;margin-bottom:5.0pt'>
+
+<ol start=1 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;margin-bottom:12.0pt;
+     mso-list:l10 level1 lfo14;tab-stops:list .5in'><span style='font-size:
+     10.0pt;font-family:Arial'>Use a text editor to open ddrint.ini.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;margin-bottom:12.0pt;
+     mso-list:l10 level1 lfo14;tab-stops:list .5in'><span style='font-size:
+     10.0pt;font-family:Arial'>Verify the following entries in the
+     [DDRINT_LOCATIONS] section to ensure the application server generates the
+     correct directory paths:<br>
+     <br>
+     <span class=SpellE>URLReferenceLocation</span>=&lt;<i>full URL of the <span
+     class=SpellE>DocumentDirect</span> for the Internet work directory</i>&gt;<br>
+     <span class=SpellE>ExternalDataLocation</span>=&lt;<i>full path of the <span
+     class=SpellE>DocumentDirect</span> for the Internet work directory</i>&gt;<br>
+     <span class=SpellE>ProgDirectory</span>=&lt;<i>full path of the <span
+     class=SpellE>DocumentDirect</span> for the Internet WEB-INF/lib directory</i>&gt;<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l10 level1 lfo14;tab-stops:list .5in'><span style='font-size:
+     10.0pt;font-family:Arial'>Make any necessary changes, then save and close
+     the file.<o:p></o:p></span></li>
+</ol>
+
+</blockquote>
+
+<p><span style='font-size:10.0pt;font-family:Arial'><a href="index.html">Proceed
+to <span class=SpellE>ViewDirect</span> API for Java Reference Guide</a><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

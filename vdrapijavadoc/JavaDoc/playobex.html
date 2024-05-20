@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<TITLE>Playback Command Example</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<h3><font face="arial">Creating a Playback Object - Example</font></h3>
+
+<TT>// Create a playback command.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>PlaybackCommand player = new PlaybackCommand() ;</TT><FONT FACE="Arial"><BR>
+<BR>
+</FONT><TT>// Set the callbacks. In this example, the current object implements all required callbacks.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>player.setObjectWithNode(this) ;</TT><FONT FACE="Arial"><BR>
+</FONT><TT>player.setPromptForPlaybackError(this) ;</TT><FONT FACE="Arial"><BR>
+</FONT><TT>player.setPromptForLogin(this) ;</TT><FONT FACE="Arial"><BR>
+<BR>
+</FONT><TT>// Some commands generate data, such as the CreatePageGroupCommand. Create the output stream </TT><FONT FACE="Arial"><BR>
+</FONT><TT>// to which the data will be written.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>FileOutputStream downloadFile = new FileOutputStream("Download.zip") ;</TT><FONT FACE="Arial"><BR>
+</FONT><TT>player.setOutputStream(downloadFile) ;</TT><FONT FACE="Arial"><BR>
+<BR>
+</FONT><TT>// Set up the filename key-value pair.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>Vector keyValuePairs = new Vector() ;</TT><FONT FACE="Arial"><BR>
+</FONT><TT>keyValuePairs.add(new ICommand.KeyValuePair(CommandKeyType.FileName,fileName)) ;</TT><FONT FACE="Arial"><BR>
+<BR>
+</FONT><TT>// Load the key-value pair.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>player.load(keyValuePairs) ;</TT><FONT FACE="Arial"><BR>
+<BR>
+</FONT><TT>// Execute the playback command.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>player.execute() ;</TT><FONT FACE="Arial"><BR>
+<BR>
+</FONT><TT>// Close the download file.</TT><FONT FACE="Arial"><BR>
+</FONT><TT>downloadFile.close() ;</TT><FONT FACE="Arial"><BR>
+</div></P>
+
+
+<p><font face="arial"><a href="overview.html#playobj">Back to Overview</a></font>
+
+</BODY>
+</HTML>

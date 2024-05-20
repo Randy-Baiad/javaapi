@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+<TITLE>Topic Item Retrieval Example</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<h3><font face="arial">Retrieving Pages from a Topic Item Section</h3>
+
+<p><tt><font face="arial">To retrieve specifc pages from a Topic Item section, perform the following steps:
+
+<ol><li>Navigate the Topic node hierarchy and retrieve the relevant Topic Item Report, Topic Item Version,
+ and Topic Item Sections by using the <CODE>IListFactory</CODE>  <CODE>createList</CODE>(<CODE>QueryParam</CODE>) method.
+ For example:
+
+ <pre>// get topic id
+ INode [] topicid = topiclistfactory.<CODE>createList</CODE>(<CODE>QueryParam</CODE>);
+ ...
+ // topic version
+ INode [] topicversion = ((<CODE>IListFactory</CODE>)topicid[i]).<CODE>createList</CODE>(<CODE>QueryParam</CODE>);
+ ...
+ // topic item
+ INode [] topicitem = ((<CODE>IListFactory</CODE>)topicversion[i]).<CODE>createList</CODE>(<CODE>QueryParam</CODE>);
+ ...
+ // topic item report
+ INode [] topicitemreport = ((<CODE>IListFactory</CODE>)topicitem[i]).<CODE>createList</CODE>(<CODE>QueryParam</CODE>);
+ ...
+ // topic item report version
+ INode [] topicitemreportversion = ((<CODE>IListFactory</CODE>)topicitemreport[i]).<CODE>createList</CODE>(<CODE>QueryParam</CODE>);
+ ...</pre>
+
+
+ For information on defining a query, refer to the <CODE>QueryParam</CODE> class.
+<br><br>
+ <li>Obtain the Topic Item Section Nodes by iterating through the Topic Item Sections you retrieved. For example:
+
+ <pre>INode [] topicitemsection = ((<CODE>IListFactory</CODE>)topicitemreportversion[i]).<CODE>createList</CODE>(<CODE>QueryParam</CODE>);
+ for ( int i = 0; i < topicsection.length; i++ ) {
+       sectionName = ((<CODE>SectionNode</CODE>)topicitemsection[i]).<CODE>getSectionName()</CODE>;
+       pageCount = ((<CODE>SectionNode</CODE>)topicitemsection[i]).<CODE>getPageCount()</CODE>;
+       ...
+ }</pre>
+
+ <li>Retrieve the fully qualified section name and the total number of pages from the
+ Topic Item section node by casting the TopicSectionNode object as a SectionNode and calling the
+ <CODE>getSectionName()</CODE> and <CODE>getPageCount()</CODE> methods respectively. For example:
+
+ <pre>
+ 	sectionName = ((<CODE>SectionNode</CODE>)ts[i]).<CODE>getSectionName()</CODE>;
+ 	pageCount = ((<CODE>SectionNode</CODE>)ts[i]).<CODE>getPageCount()</CODE>;
+ </pre>
+
+ Use the section name string returned from the <CODE>getSectionName()</CODE> method as the SECTIONID. The section name
+ string contains the information that determines the actual page(s) to be retrieved.<br><br>
+
+ <li>Retrieve topic item pages as follows:<br><br>
+
+ <Ul><li>To retrieve all the pages in a Topic Item, call the <CODE>load()</CODE> and
+ <CODE>execute()</CODE> methods for each Topic Item Section in the Topic Item.
+
+ <li>To retrieve all the pages in a Topic Item section, set the PAGES parameter to
+ FROM 1 <i>y</i>, where <i>y</i> is the value returned from <CODE>getPageCount()</CODE>.
+
+ <li>To retrieve specific pages from a Topic Item section, use the FROM x y value of the PAGES parameter,
+ as shown in the following example. Note that the pages retrieved are relative to the first page of the topic item;
+ the actual report page number is not relevant.
+
+ <p><b>Example:</b> A Topic Item section contains 12 pages, which represent 12 report section pages beginning at page 501.
+ To select the first six topic item section pages, specify FROM 1 6. This retrieves report section pages 501 through 506.
+ To select the last six pages, specify FROM 7 12. This returns report section pages 507 through 512.
+</ul>
+
+ <p><b>Note:</b> The ALL and ALLINSECTION
+ PAGES paramater values are not valid when retrieving Topic Item section pages.
+</ol>
+<p><font face="arial"><a href="overview.html#topitem">Back to Overview</a></font>
+
+</BODY>
+</HTML>
